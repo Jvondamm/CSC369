@@ -1,0 +1,5 @@
+Addresses taken from: https://results.openaddresses.io/
+Fake store names found: https://namesbee.com/store-names/
+Electronic product names found: https://www.kaggle.com/datasets/datafiniti/electronic-products-prices?resource=download
+
+Generates 5 CSV files of random data of fake stores in Portland Oregon with fake customers, real electronic products, and sales within 2022 and lineItem records. 
