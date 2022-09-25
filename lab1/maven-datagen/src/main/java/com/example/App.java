@@ -10,10 +10,10 @@ import java.text.DecimalFormat;
 
 public class App 
 {
-    public static final String ADDRESS_CSV = "src/main/java/com/example/addresses.csv";
-    public static final String NAMES_CSV = "src/main/java/com/example/names.csv";
-    public static final String PRODUCT_CSV = "src/main/java/com/example/products.csv";
-    public static final String STORENAMES_TXT = "src/main/java/com/example/storenames.txt";
+    public static final String ADDRESS_CSV = "lab1/maven-datagen/src/main/java/com/example/addresses.csv";
+    public static final String NAMES_CSV = "lab1/maven-datagen/src/main/java/com/example/names.csv";
+    public static final String PRODUCT_CSV = "lab1/maven-datagen/src/main/java/com/example/products.csv";
+    public static final String STORENAMES_TXT = "lab1/maven-datagen/src/main/java/com/example/storenames.txt";
 
     public static final int STORE_NUM = 100;
     public static final int CUSTOMER_NUM = 1000;
