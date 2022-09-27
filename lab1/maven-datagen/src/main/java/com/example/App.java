@@ -8,7 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.DecimalFormat;
 
-public class App 
+public class App
 {
     public static final String ADDRESS_CSV = "lab1/maven-datagen/src/main/java/com/example/addresses.csv";
     public static final String NAMES_CSV = "lab1/maven-datagen/src/main/java/com/example/names.csv";
@@ -43,11 +43,11 @@ public class App
 
                 Random rand = new Random();
                 int randAddr = rand.nextInt(827879-1);
-                String[] temp = {String.valueOf(i), 
+                String[] temp = {String.valueOf(i),
                                 s,
-                                addresses.get(randAddr)[3], 
-                                "Portland", 
-                                addresses.get(randAddr)[8], 
+                                addresses.get(randAddr)[3],
+                                "Portland",
+                                addresses.get(randAddr)[8],
                                 "OR",
                                 phoneNum()};
                 store.add(temp);
@@ -162,9 +162,9 @@ public class App
             ++n;
             String line = sc.nextLine();
             if(rand.nextInt(n) == 0)
-            result = line;         
+            result = line;
         }
-        return result;      
+        return result;
     }
 
     public static String phoneNum()
@@ -178,9 +178,9 @@ public class App
         return df3.format(num1) + "-" + df3.format(num2) + "-" + df4.format(num3);
     }
 
-    public static String birthDate() 
+    public static String birthDate()
     {
-    
+
         GregorianCalendar gc = new GregorianCalendar();
         int year = randBetween(1900, 2010);
         gc.set(gc.YEAR, year);
@@ -189,7 +189,7 @@ public class App
         return(gc.get(gc.YEAR) + "/" + (gc.get(gc.MONTH) + 1) + "/" + gc.get(gc.DAY_OF_MONTH));
     }
 
-    public static String recentDate() 
+    public static String recentDate()
     {
         GregorianCalendar gc = new GregorianCalendar();
         int year = randBetween(2022, 2022);
@@ -206,8 +206,8 @@ public class App
         DateFormat format = new SimpleDateFormat("HH:mm:ss");
         return format.format(random.nextInt(millisInDay));
     }
-    
-    public static int randBetween(int start, int end) 
+
+    public static int randBetween(int start, int end)
     {
         return start + (int)Math.round(Math.random() * (end - start));
     }
