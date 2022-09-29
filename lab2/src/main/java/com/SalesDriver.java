@@ -23,8 +23,8 @@ public class SalesDriver extends Configured
         job.setOutputValueClass(DoubleWritable.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);
-        job.setMapperClass(TemperatureMapper.class);
-        job.setReducerClass(TemperatureReducer.class);
+        job.setMapperClass(SalesMapper.class);
+        job.setReducerClass(SalesReducer.class);
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
         boolean status = job.waitForCompletion(true);
