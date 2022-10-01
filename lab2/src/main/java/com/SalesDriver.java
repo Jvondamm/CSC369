@@ -1,5 +1,3 @@
-package main.java.com;
-
 import org.apache.log4j.Logger;
 import org.apache.hadoop.util.*;
 import org.apache.hadoop.conf.*;

@@ -1,4 +1,4 @@
-package main.java.com;
+
 
 import java.io.*;
 import org.apache.hadoop.io.*;
