@@ -16,6 +16,6 @@ public class SalesMapper extends
          return;
       }
       context.write(new Text(tokens[1]),
-                  new IntWritable(Integer.parseInt(tokens[0])));
+                  new IntWritable(1));
    }
 }
