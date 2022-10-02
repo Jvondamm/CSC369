@@ -22,6 +22,7 @@ public class SalesDriver extends Configured
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);
         job.setMapperClass(SalesMapper.class);
+        job.setCombinerClass(SalesReducer.class);
         job.setReducerClass(SalesReducer.class);
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
