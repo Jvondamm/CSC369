@@ -9,7 +9,7 @@ public class SalesCombiner
     public void reduce(Text key, IntWritable value, Context context)
        throws IOException, InterruptedException {
         int count = 0;
-        for(IntWritable sale: sales){
+        for(IntWritable val: value){
            count++;
         }
        context.write(key, new IntWritable(count));
