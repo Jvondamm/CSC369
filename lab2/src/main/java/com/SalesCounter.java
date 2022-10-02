@@ -6,13 +6,14 @@ import java.util.*;
 public class SalesCounter {
     public static void main(String[] args) throws Exception
     {
+        long startTime = System.nanoTime();
         HashMap<String, Integer> sales = new HashMap<>();
         String line = "";
         int count = 0;
 
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("sales.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("./sales.csv"));
             while ((line = br.readLine()) != null)
             {
                 String[] items = line.split(",");
@@ -39,7 +40,6 @@ public class SalesCounter {
             file.write(index + " " + sales.get(index) + "\n");
         }
         file.close();
+        System.out.println(System.nanoTime() - startTime);
     }
-
-
 }
