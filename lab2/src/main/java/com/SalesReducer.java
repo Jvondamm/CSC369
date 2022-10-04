@@ -17,7 +17,7 @@ extends Reducer<Text, IntWritable, Text, IntWritable> {
       throws IOException, InterruptedException {
       int count = 0;
       for(IntWritable sale: sales){
-         count = count + sale;
+         count = count + sale.get();
       }
       context.write(date, new IntWritable(count));
    }
