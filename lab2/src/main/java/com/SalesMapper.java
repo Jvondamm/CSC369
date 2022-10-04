@@ -17,7 +17,7 @@ public class SalesMapper extends
       String valueAsString = value.toString().trim();
       String[] tokens = valueAsString.split(" ");
 
-      THE_LOGGER.info(tokens, tokens.length);
+      THE_LOGGER.info(tokens);
 
       context.write(new Text(tokens[1]),
                   new IntWritable(1));
