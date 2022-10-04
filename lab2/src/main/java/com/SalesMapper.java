@@ -15,7 +15,7 @@ public class SalesMapper extends
    public void map(LongWritable key, Text value, Context context)
          throws IOException, InterruptedException {
       String valueAsString = value.toString().trim();
-      String[] tokens = valueAsString.split(" ");
+      String[] tokens = valueAsString.split(",");
 
       THE_LOGGER.info(tokens);
 
