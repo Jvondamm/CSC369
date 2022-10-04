@@ -4,6 +4,7 @@ import java.io.*;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.Reducer.*;
+import org.apache.log4j.Logger;
 
 public class SalesReducer
 extends Reducer<Text, IntWritable, Text, IntWritable> {

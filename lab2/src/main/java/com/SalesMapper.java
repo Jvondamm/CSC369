@@ -16,7 +16,7 @@ public class SalesMapper extends
          throws IOException, InterruptedException {
       String valueAsString = value.toString().trim();
       String[] tokens = valueAsString.split(" ");
-      
+
       THE_LOGGER.info(tokens, tokens.length);
 
       context.write(new Text(tokens[1]),
