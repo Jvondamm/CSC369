@@ -9,10 +9,10 @@ public class SecondarySortPartitioner
    extends Partitioner<YMTemperaturePair, IntWritable> {
 
     @Override
-    public int getPartition(YMTemperaturePair pair,
-                            IntWritable temperature,
+    public int getPartition(Sales Sale,
+                            Text Time,
                             int numberOfPartitions) {
-    return Math.abs(pair.getYearMonth().hashCode() %
+    return Math.abs(pair.getDate().hashCode() %
                                            numberOfPartitions);
     }
 }

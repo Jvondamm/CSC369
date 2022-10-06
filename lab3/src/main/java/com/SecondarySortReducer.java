@@ -5,17 +5,17 @@ import org.apache.hadoop.mapreduce.Reducer.*;
 import org.apache.log4j.Logger;
 
 public class SecondarySortReducer
-    extends Reducer<YMTemperaturePair, IntWritable, Text, Text> {
+    extends Reducer<Sales, Text, Text, Text> {
 
     @Override
-    protected void reduce(YMTemperaturePair key,
-                   Iterable<IntWritable> values, Context context)
+    protected void reduce(Sales key,
+                   Iterable<Text> values, Context context)
     	throws IOException, InterruptedException {
     	String result="";
-    	for (IntWritable value : values) {
+    	for (Text value : values) {
             result += (value.toString()+",");
 	}
        result = result.substring(0, result.length()-1);
-       context.write(key.getYearMonth(), new Text(result));
+       context.write(key.getDate(), new Text(result));
     }
 }

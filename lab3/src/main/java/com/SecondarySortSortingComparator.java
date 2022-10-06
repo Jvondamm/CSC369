@@ -6,14 +6,14 @@ public class SecondarySortSortingComparator
    extends WritableComparator {
 
     protected SecondarySortSortingComparator() {
-        super(YMTemperaturePair.class, true);
+        super(Sales.class, true);
     }
 
     @Override
     public int compare(WritableComparable wc1,
                                         WritableComparable wc2) {
-        YMTemperaturePair pair = (YMTemperaturePair) wc1;
-        YMTemperaturePair pair2 = (YMTemperaturePair) wc2;
+        Sales pair = (Sales) wc1;
+        Sales pair2 = (Sales) wc2;
         return pair.compareTo(pair2);
     }
 }

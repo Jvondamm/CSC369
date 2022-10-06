@@ -19,8 +19,8 @@ public class SalesDriver extends Configured
         job.setJobName("SalesDriver");
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-        job.setMapOutputKeyClass(YMTemperaturePair.class);
-        job.setMapOutputValueClass(IntWritable.class);
+        job.setMapOutputKeyClass(Sales.class);
+        job.setMapOutputValueClass(Text.class);
         job.setMapperClass(SecondarySortMapper.class);
         job.setCombinerClass(SecondarySortReducer.class);
         job.setReducerClass(SecondarySortReducer.class);
