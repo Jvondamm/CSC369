@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Partitioner;
 
 public class SecondarySortPartitioner
                           // < key, value >
-   extends Partitioner<Sales, IntWritable> {
+   extends Partitioner<Sales, Text> {
 
     @Override
     public int getPartition(Sales Sale,
