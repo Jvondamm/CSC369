@@ -12,7 +12,7 @@ public class SecondarySortPartitioner
     public int getPartition(Sales Sale,
                             Text Time,
                             int numberOfPartitions) {
-    return Math.abs(pair.getDate().hashCode() %
+    return Math.abs(Sale.getDate().hashCode() %
                                            numberOfPartitions);
     }
 }
