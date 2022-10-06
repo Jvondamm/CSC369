@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.*;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
