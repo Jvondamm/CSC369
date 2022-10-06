@@ -12,8 +12,8 @@ public class SecondarySortMapper
      context) throws IOException, InterruptedException {
     String line = value.toString();
     String[] tokens = line.split(",");
-    String obj1 = new Sale(tokens[1], tokens[2], tokens[0]);
-    String obj2 = new Text(tokens[2] + ", " + tokens[0]);
-    context.write(obj1, obj2);
+    Sales Sale = new Sales(tokens[1], tokens[2], tokens[0]);
+    Text Text = new Text(tokens[2] + ", " + tokens[0]);
+    context.write(Sale, Text);
     }
 }

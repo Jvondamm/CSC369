@@ -36,11 +36,11 @@ public class Sales
     }
 
     @Override
-    public int compareTo(Sale o) {
-        if(date.compareTo(o.getDate())==0){
-            return time.compareTo(o.time);
+    public int compareTo(Sales o) {
+        if(Date.compareTo(o.getDate())==0){
+            return Time.compareTo(o.Time);
         }
-        return date.compareTo(o.getDate());
+        return Date.compareTo(o.getDate());
     }
 
     public Text getDate() {
