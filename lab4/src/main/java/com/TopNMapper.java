@@ -8,7 +8,7 @@ public class TopNMapper extends
     public static final int DEFAULT_N = 10;
     private int n = DEFAULT_N;
 
-    private TreeSet<Product> top = new TreeSet<>();
+    private TreeSet<Record> top = new TreeSet<>();
 
     @Override
     public void map(LongWritable key, Text value, Context context)
