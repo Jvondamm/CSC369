@@ -8,9 +8,9 @@ public class Record implements Comparable <Record>{
         this.categoryName = categoryName;
         this.weight = weight;
     }
-    public String toString() {
-        return id + "," + categoryName + "," + weight;
-    }
+    // public String toString() {
+    //     return id + "," + categoryName + "," + weight;
+    // }
     public int compareTo(Record other) {
         if(this.weight > other.weight) {
             return -1;
