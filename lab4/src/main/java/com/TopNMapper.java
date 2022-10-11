@@ -12,7 +12,7 @@ public class TopNMapper extends
     private TreeSet<Record> top = new TreeSet<>();
 
     private static final Logger THE_LOGGER =
-             Logger.getLogger(ProductsDriver.class);
+             Logger.getLogger(TopNMapper.class);
 
     @Override
     public void map(LongWritable key, Text value, Context context)
