@@ -12,12 +12,10 @@ public class Record implements Comparable <Record>{
     //     return id + "," + categoryName + "," + weight;
     // }
     public int compareTo(Record other) {
-        if(this.weight > other.weight) {
-            return -1;
-        } 
-        if(this.weight < other.weight){
-            return 1;
-        }
+        if(this.weight > other.weight) return -1;
+        if(this.weight < other.weight) return 1;
+        if (this.id > other.id) return  1;
+	    if (this.id < other.id) return -1;
         return 0;
     }
 }
