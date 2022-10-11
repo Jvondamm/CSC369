@@ -19,8 +19,7 @@ public class TopNMapper extends
             throws IOException, InterruptedException {
         String line = value.toString().trim();
         String[] tokens = line.split(",");
-        THE_LOGGER.info(" in logger ");
-        THE_LOGGER.info(tokens);
+        THE_LOGGER.info(Arrays.toString(tokens));
         double weight = Double.parseDouble(tokens[2].trim());
         top.add(new Record(Integer.parseInt(tokens[0].trim()),tokens[1].trim(),weight));
 
