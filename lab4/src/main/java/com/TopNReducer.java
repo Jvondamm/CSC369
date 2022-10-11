@@ -2,6 +2,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Reducer;
+import java.io.IOException;
 
 public class TopNReducer  extends
    Reducer<NullWritable, Text, NullWritable, Text> {

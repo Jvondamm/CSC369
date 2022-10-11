@@ -17,13 +17,15 @@ public class ProductsDriver extends Configured
         Job job = Job.getInstance();
         job.setJarByClass(ProductsDriver.class);
         job.setJobName("ProductsDriver");
-        job.getConfiguration().setInt("N", n);
         job.setOutputKeyClass(IntWritable.class);
         job.setOutputValueClass(Text.class);
         job.setMapOutputKeyClass(NullWritable.class);
         job.setMapOutputValueClass(Text.class);
-        job.setMapperClass(SecondarySortMapper.class);
-        job.setReducerClass(SecondarySortReducer.class);
+        job.setMapperClass(TopNMapper.class);
+        job.setReducerClass(TopNReducer.class);
+
+        int n = 10;
+        job.getConfiguration().setInt("N", n);
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
