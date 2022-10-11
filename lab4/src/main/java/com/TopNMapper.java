@@ -3,6 +3,7 @@ import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 import org.apache.log4j.Logger;
+import java.util.Arrays;
 
 public class TopNMapper extends
         Mapper<LongWritable, Text, NullWritable, Text> {
