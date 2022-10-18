@@ -12,21 +12,21 @@ object App {
 
   def store: List[(String, String, String, String, String, String, String)] = {
     return Source.fromFile("store.csv").getLines().toList.map(x =>
-        (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3), x.split(", ")(4),x.split(", ")(5),x.split(", ")(6)))
+        (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3), x.split(",")(4),x.split(",")(5),x.split(",")(6)))
   }
 
   def sales: List[(String, String, String, String, String)] = {
     return Source.fromFile("sales.csv").getLines().toList.map(x =>
-        (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3), x.split(", ")(4)))
+        (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3), x.split(",")(4)))
   }
 
   def product: Map[String, Double] = {
     return Source.fromFile("product.csv").getLines().toList.map(x =>
-        x.split(", ")(0) -> x.split(", ")(1).toDouble).toMap
+        x.split(",")(0) -> x.split(",")(1).toDouble).toMap
   }
 
   def lineItem: List[(String, String, String, Int)] = {
     return Source.fromFile("lineItem.csv").getLines().toList.map(x =>
-        (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3).toInt))
+        (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3).toInt))
   }
 }
