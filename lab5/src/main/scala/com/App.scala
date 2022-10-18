@@ -20,12 +20,12 @@ object App {
         (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3), x.split(", ")(4)))
   }
 
-  def product: List[String, String, Double] = {
+  def product: List[(String, String, Double)] = {
     return Source.fromFile("product.csv").getLines().toList.map(x =>
-        (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2).toDouble()))
+        (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2).toDouble))
   }
 
-  def lineItem: List[(Int, Int, Int, Int)] = {
+  def lineItem: List[(String, String, String, Int)] = {
     return Source.fromFile("lineItem.csv").getLines().toList.map(x =>
         (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3).toInt))
   }
