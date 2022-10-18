@@ -1,6 +1,7 @@
 package example
 import scala.io._
 import scala.collection._
+import scala.math.BigDecimal
 
 object App {
   def main(args: Array[String]): Unit = {
@@ -22,7 +23,7 @@ object App {
 
   def product: Map[String, Double] = {
     return Source.fromFile("product.csv").getLines().toList.map(x =>
-        x.split(",")(0) -> x.split(",")(2).toDouble).toMap
+        x.split(",")(0) -> x.split(",")(2).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble).toMap
   }
 
   def lineItem: List[(String, String, String, Int)] = {
