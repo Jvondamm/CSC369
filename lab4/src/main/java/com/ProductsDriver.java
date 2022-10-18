@@ -15,6 +15,8 @@ public class ProductsDriver extends Configured
     @Override
     public int run(String[] args) throws Exception {
         Job job = Job.getInstance();
+        int n = 10;
+        job.getConfiguration().setInt("N", n);
         job.setJarByClass(ProductsDriver.class);
         job.setJobName("ProductsDriver");
         job.setOutputKeyClass(IntWritable.class);
@@ -23,9 +25,6 @@ public class ProductsDriver extends Configured
         job.setMapOutputValueClass(Text.class);
         job.setMapperClass(TopNMapper.class);
         job.setReducerClass(TopNReducer.class);
-
-        int n = 10;
-        job.getConfiguration().setInt("N", n);
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));

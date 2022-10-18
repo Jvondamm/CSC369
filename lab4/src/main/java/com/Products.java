@@ -1,5 +1,4 @@
 package main.java.com;
-
 import java.io.*;
 import java.util.*;
 
@@ -13,6 +12,7 @@ public class Products {
             while ((line = br.readLine()) != null)
             {
                 String[] items = line.split(",");
+                System.out.println(Arrays.toString(items));
                 System.out.println(items[2].trim());
             }
             br.close();
