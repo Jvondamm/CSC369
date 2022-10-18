@@ -1,5 +1,5 @@
 package example
-import scala.collection._
+import scala._
 
 object App {
   def main(args: Array[String]): Unit = {
