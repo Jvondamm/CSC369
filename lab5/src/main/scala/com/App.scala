@@ -23,7 +23,7 @@ object App {
 
   def product: Map[String, Double] = {
     return Source.fromFile("product.csv").getLines().toList.map(x =>
-        x.split(",")(0) -> x.split(",")(2).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble).toMap
+        x.split(",")(0) -> x.split(",")(2).toDouble.setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble).toMap
   }
 
   def lineItem: List[(String, String, String, Int)] = {
