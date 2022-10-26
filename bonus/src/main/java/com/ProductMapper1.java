@@ -12,7 +12,7 @@ public class ProductMapper1
      context) throws IOException, InterruptedException {
     String line = value.toString();
     String[] tokens = line.split(",");
-    IntWritable ProductID = new IntWritable(Integer.parseInt(tokens[0].trim()));
+    Text ProductID = new Text(tokens[0].trim());
     Text Price = new Text(tokens[2].trim());
     PairOfStrings outputKey = new PairOfStrings();
     PairOfStrings outputValue = new PairOfStrings();

@@ -12,7 +12,7 @@ public class SalesMapper1
      context) throws IOException, InterruptedException {
     String line = value.toString();
     String[] tokens = line.split(",");
-    IntWritable SalesID = new IntWritable(Integer.parseInt(tokens[0].trim()));
+    Text SalesID = new Text(tokens[0].trim());
     IntWritable Date = new IntWritable(Integer.parseInt(tokens[1].trim()));
     IntWritable StoreID = new IntWritable(Integer.parseInt(tokens[3].trim()));
     PairOfStrings outputKey = new PairOfStrings();

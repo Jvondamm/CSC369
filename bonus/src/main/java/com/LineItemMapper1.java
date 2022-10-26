@@ -12,7 +12,7 @@ public class LineItemMapper1
      context) throws IOException, InterruptedException {
     String line = value.toString();
     String[] tokens = line.split(",");
-    IntWritable ProductID = new IntWritable(Integer.parseInt(tokens[2].trim()));
+    Text ProductID = new Text(tokens[2].trim());
     Text Values = new Text(tokens[1].trim()+" "+tokens[3].trim());
     PairOfStrings outputKey = new PairOfStrings();
     PairOfStrings outputValue = new PairOfStrings();

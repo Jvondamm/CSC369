@@ -15,16 +15,16 @@ public class Reducer1
     public void reduce(PairOfStrings key,
                    Iterable<PairOfStrings> values, Context context)
        throws java.io.IOException, InterruptedException {
-       Iterator<PairOfStrings> iterator = values.iterator();
+      Iterable<PairOfStrings> iterator = values.iterator();
        PairOfStrings firstPair = iterator.next();
        if (firstPair.getLeftElement().toString().equals("L")) {
           String[] tokens = firstPair.getRightElement().split(" ");
-          SalesID.set(tokens[0]);
-          Quantity.set(tokens[1]);
+          SalesID.set(Integer.parseInt(tokens[0]));
+          Quantity.set(Integer.parseInt(tokens[1]));
           PairOfStrings secondPair = iterator.next();
           Price.set(secondPair.getRightElement());
           context.write(NullWritable.get(), new Text(SalesID.toString()+","+
-          (Integer.parseInt(Price) * Integer.parseInt(Quantity)).toString()));
+          (Price.get() * Quantity.get()).toString()));
        } else {
          context.write(NullWritable.get(), new Text("undefined"));
        }
