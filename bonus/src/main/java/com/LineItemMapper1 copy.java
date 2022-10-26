@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Mapper.*;
 import org.apache.log4j.Logger;
 
 public class LineItemMapper1
-    extends Mapper<LongWritable, Text, Sales, Text> {
+    extends Mapper<LongWritable, Text, PairOfStrings, PairOfStringsAndInt> {
   @Override
   public void map(LongWritable key, Text value, Context
      context) throws IOException, InterruptedException {
@@ -16,7 +16,7 @@ public class LineItemMapper1
     IntWritable ProductID = new IntWritable(tokens[2].trim());
     IntWritable Quantity = new IntWritable(tokens[3].trim());
     PairOfStrings outputKey = new PairOfStrings();
-    PairOfStrings outputValue = new PairOfStrings();
+    PairOfStringsAndInt outputValue = new PairOfStringsAndInt();
     outputKey.set(ProductID, new Text("1"));
     outputValue.set(new Text("L"), SalesID, Quantity);
     context.write(outputKey, outputValue);
