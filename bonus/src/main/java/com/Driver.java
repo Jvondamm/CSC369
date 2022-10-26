@@ -41,10 +41,10 @@ public class Driver extends Configured
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
-        MultipleInputs.addInputPath(job, product,
-          TextInputFormat.class, ProductMapper1.class);
         MultipleInputs.addInputPath(job, lineItem, 
         TextInputFormat.class, LineItemMapper1.class);
+        MultipleInputs.addInputPath(job, product,
+          TextInputFormat.class, ProductMapper1.class);
 
         job.setMapOutputKeyClass(PairOfStrings.class);
         job.setMapOutputValueClass(PairOfStrings.class);

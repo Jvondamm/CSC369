@@ -16,7 +16,7 @@ public class LineItemMapper1
     Text Values = new Text(tokens[1].trim()+" "+tokens[3].trim());
     PairOfStrings outputKey = new PairOfStrings();
     PairOfStrings outputValue = new PairOfStrings();
-    outputKey.set(ProductID, new Text("1"));
+    outputKey.set(ProductID, new Text("2"));
     outputValue.set(new Text("L"), Values);
     context.write(outputKey, outputValue);
     }

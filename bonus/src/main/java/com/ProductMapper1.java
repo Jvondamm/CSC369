@@ -16,7 +16,7 @@ public class ProductMapper1
     Text Price = new Text(tokens[2].trim());
     PairOfStrings outputKey = new PairOfStrings();
     PairOfStrings outputValue = new PairOfStrings();
-    outputKey.set(ProductID, new Text("2"));
+    outputKey.set(ProductID, new Text("1"));
     outputValue.set(new Text("P"), Price);
     context.write(outputKey, outputValue);
     }

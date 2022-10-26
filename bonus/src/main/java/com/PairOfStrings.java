@@ -43,7 +43,7 @@ public class PairOfStrings
         if (compareValue == 0) {
             compareValue = right.compareTo(pair.right);
         }
-        return -1*compareValue;
+        return compareValue;
     }
     public String toString(){
         return left+", "+right;
