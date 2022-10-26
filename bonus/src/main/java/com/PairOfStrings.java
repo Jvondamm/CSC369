@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.io.*;
+import org.apache.hadoop.io.*;
+
 public class PairOfStrings
         implements Writable, WritableComparable<PairOfStrings> {
 

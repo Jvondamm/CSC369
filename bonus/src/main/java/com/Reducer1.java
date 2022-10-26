@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Reducer.*;
 import org.apache.log4j.Logger;
 
 public class Reducer1
-        extends Reducer<PairOfStrings, PairOfStrings, Text, Text> {
+        extends Reducer<PairOfStrings, PairOfStrings, NullWritable, Text> {
     IntWritable Price = new IntWritable();
     IntWritable Quantity = new IntWritable();
     IntWritable SalesID = new IntWritable();
@@ -23,10 +23,10 @@ public class Reducer1
           Quantity.set(tokens[1]);
           PairOfStrings secondPair = iterator.next();
           Price.set(secondPair.getRightElement());
-          context.write(new Text(), new Text(SalesID.toString()+","+
-          (Price * Quantity).toString()));
+          context.write(NullWritable.get(), new Text(SalesID.toString()+","+
+          (Integer.parseInt(Price) * Integer.parseInt(Quantity)).toString()));
        } else {
-         context.write(new Text("undefined"), new Text("undefined"));
+         context.write(NullWritable.get(), new Text("undefined"));
        }
     }
 }
