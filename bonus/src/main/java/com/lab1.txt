@@ -1,0 +1,19 @@
+Lab 1. Data Generation
+Use Java to create several text files. Separate values by a comma followed by space. IDs (first attribute) should be unique in each file and feel free to use auto-increment (e.g., 1,2,3, ...). Stores dates as YYYY/MM/DD
+The store file should contain ID, storeName, address, city, ZIP, state, phoneNumber. Example record:
+12, Best Buy, 123 Main St, SLO, 93401, CA, 805 555 5555.
+Create 100 records with random data in this file.
+The customer file should contain ID, name, birth date, address, city, ZIP, state, phoneNumber. Example record:
+12, John Sam, 1989/11/11, 123 Main St, SLO, 93401, CA, 805 555 5555.
+Create 1,000 records with random data in the file
+The sales file should contain ID, date, time, storeID, customerID. Example record:
+13, 2017/01/01, 13:23:11, 23, 56
+Create 2,000 records with random data in the file. Make sure you select store IDs and customer IDs from existing store and customer IDs, respectively. There should be at least one sale for every customer and every store.
+The product file should contain ID, description, price. For example:
+122, XBox 360, 230.23
+Create 100 products.
+The lineItem file should contain ID, salesID, productID, quantity. For example:
+11, 13, 122, 8.
+Create 4,000 lineItem records. Make sure that ever line item references an existing sales and product. Every sale consists of one or more line items.
+
+Use online resources to generate meaningful data as much as possible. For example, use may use a database with first and last names to generate the names of the customers. Select zip codes, cities, and states from a database with this information. Select street names from a database with street names. Make sure every ID field (except for the first one) references an existing ID in the correct file. To summarize, I want the data to be as close to real-world data as possible. The number of records to be generated for each file should be a constant (i.e., static final) and you should be able to easily change it.

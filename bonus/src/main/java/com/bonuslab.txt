@@ -1,0 +1,5 @@
+Bonus Lab
+Write a Map/Reduce program that finds the top 10 stores with the most revenues from sales (dollar amount of total sales) per month. The result should be ordered by month (ascending) and then by total proceeds from sales (descending). Example output:
+2016-12, (Best Buy, SLO, $1444355), (Costco, LA, $1400344), ... //storeName =Best Buy, store city = SLO, total sales = $1,444,355
+2017-01 //and so on
+Write a Java program that does not use Hadoop and finds the same result. Please use appropriate structures (e.g., HashSet, HashMap) to make the Java program as efficient as possible. Make sure you get the same result from both programs. Also, compare the performance of the two programs. For a fair comparison, make the Java program writes the result to a file.
