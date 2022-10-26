@@ -16,9 +16,9 @@ public class Driver extends Configured
     private static Path output;
            
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
+        if (args.length != 3) {
           throw new IllegalArgumentException
-                                    ("usage: <input> <output>");
+                                    ("usage: <input1> <input2> <output>");
         }
          product = new Path(args[0]);
          lineItem = new Path(args[1]);
