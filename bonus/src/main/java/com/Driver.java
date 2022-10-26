@@ -11,38 +11,50 @@ public class Driver extends Configured
                                          implements Tool {
     private static final Logger THE_LOGGER =
              Logger.getLogger(Driver.class);
+    private static Path product;
+    private static Path lineItem;
+    private static Path output;
+           
+    public static void main(String[] args) throws Exception {
+        if (args.length != 2) {
+          throw new IllegalArgumentException
+                                    ("usage: <input> <output>");
+        }
+         product = new Path(args[0]);
+         lineItem = new Path(args[1]);
+         output = new Path(args[2]);
+ 
+        THE_LOGGER.info("inputDir1 = " + args[0]);
+        THE_LOGGER.info("inputDir2 = " + args[1]);
+        THE_LOGGER.info("outputDir = " + args[2]);
+        int returnStatus = ToolRunner.
+                      run(new Driver(), args);
+        THE_LOGGER.info("returnStatus=" + returnStatus);
+        System.exit(returnStatus);
+     }
 
     @Override
     public int run(String[] args) throws Exception {
         Job job = Job.getInstance();
         job.setJarByClass(Driver.class);
-        job.setJobName("Driver");
+        job.setJobName("JOB 1");
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
+
+        MultipleInputs.addInputPath(job, product,
+          TextInputFormat.class, ProductMapper1.class);
+        MultipleInputs.addInputPath(job, lineItem, 
+        TextInputFormat.class, LeftJoinUserMapper.class);
+
         job.setMapOutputKeyClass(PairOfStrings.class);
         job.setMapOutputValueClass(PairOfStrings.class);
-        job.setMapperClass(LineItemMapper1.class);
         job.setReducerClass(Reducer1.class);
         job.setPartitionerClass(Partitioner1.class);
         job.setGroupingComparatorClass(GroupingComparator1.class);
 
-        FileInputFormat.setInputPaths(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        FileOutputFormat.setOutputPath(job, output);
         boolean status = job.waitForCompletion(true);
         THE_LOGGER.info("run(): status=" + status);
         return status ? 0 : 1;
     }
-    public static void main(String[] args) throws Exception {
-       if (args.length != 2) {
-         throw new IllegalArgumentException
-                                   ("usage: <input> <output>");
-       }
-       THE_LOGGER.info("inputDir = " + args[0]);
-       THE_LOGGER.info("outputDir = " + args[1]);
-       int returnStatus = ToolRunner.
-                     run(new Driver(), args);
-       THE_LOGGER.info("returnStatus=" + returnStatus);
-       System.exit(returnStatus);
-    }
 }
-
