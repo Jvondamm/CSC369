@@ -44,7 +44,7 @@ public class Driver extends Configured
         MultipleInputs.addInputPath(job, product,
           TextInputFormat.class, ProductMapper1.class);
         MultipleInputs.addInputPath(job, lineItem, 
-        TextInputFormat.class, LeftJoinUserMapper.class);
+        TextInputFormat.class, LineItemMapper1.class);
 
         job.setMapOutputKeyClass(PairOfStrings.class);
         job.setMapOutputValueClass(PairOfStrings.class);
