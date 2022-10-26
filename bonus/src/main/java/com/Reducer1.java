@@ -18,14 +18,15 @@ public class Reducer1
        Iterator<PairOfStrings> iterator = values.iterator();
        PairOfStrings firstPair = iterator.next();
        if (firstPair.getLeftElement().toString().equals("L")) {
-          SalesID.set(firstPair.getRightElement());
-          Quantity.set(firstPair.getInt());
+          String[] tokens = firstPair.getRightElement().split(" ");
+          SalesID.set(tokens[0]);
+          Quantity.set(tokens[1]);
           PairOfStrings secondPair = iterator.next();
-          Quantity.set(secondPair.getInt());
+          Price.set(secondPair.getRightElement());
+          context.write(new Text(), new Text(SalesID.toString()+","+
+          (Price * Quantity).toString()));
        } else {
-         product.set(firstPair.getRightElement());
-         context.write(product, new Text("undefined"));
-         location = new Text("undefined");
+         context.write(new Text("undefined"), new Text("undefined"));
        }
     }
 }
