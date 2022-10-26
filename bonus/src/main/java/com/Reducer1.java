@@ -19,10 +19,10 @@ public class Reducer1
       Iterator<PairOfStrings> iterator = values.iterator();
       PairOfStrings firstPair = iterator.next();
       PairOfStrings secondPair = iterator.next();
-      String[] tokens = firstPair.getRightElement().toString().split(" ");
+      Price.set(Integer.parseInt(firstPair.getRightElement().toString()));
+      String[] tokens = secondPair.getRightElement().toString().split(" ");
       SalesID.set(Integer.parseInt(tokens[0]));
       Quantity.set(Integer.parseInt(tokens[1]));
-      Price.set(Integer.parseInt(secondPair.getRightElement().toString()));
       context.write(NullWritable.get(), new Text(SalesID.toString()+","+
       Integer.toString(Price.get() * Quantity.get())));
     }
