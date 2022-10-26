@@ -4,6 +4,7 @@ import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.Reducer.*;
 import org.apache.log4j.Logger;
+import java.util.Iterator;
 
 public class Reducer1
         extends Reducer<PairOfStrings, PairOfStrings, NullWritable, Text> {
@@ -22,7 +23,7 @@ public class Reducer1
           SalesID.set(Integer.parseInt(tokens[0]));
           Quantity.set(Integer.parseInt(tokens[1]));
           PairOfStrings secondPair = iterator.next();
-          Price.set(secondPair.getRightElement().get());
+          Price.set(Integer.parseInt(secondPair.getRightElement().toString()));
           context.write(NullWritable.get(), new Text(SalesID.toString()+","+
           Integer.toString(Price.get() * Quantity.get())));
        } else {
