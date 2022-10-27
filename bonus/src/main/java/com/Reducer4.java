@@ -4,6 +4,8 @@ import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.Reducer.*;
 import org.apache.log4j.Logger;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.Iterator;
 
 public class Reducer4
@@ -13,9 +15,9 @@ public class Reducer4
    private SortedSet<Record> top = new TreeSet<>();
    private String date;
 
-   public void reduce(NullWritable key, Iterable<Text> values, Context context) 
+   public void reduce(PairOfStrings key, Iterable<PairOfStrings> values, Context context) 
    throws IOException, InterruptedException {
-      for (Text value : values) {
+      for (PairOfStrings value : values) {
          String[] tokens = value.getRightElement.toString().trim().split(" ");
          date = tokens[0].trim();
          top.add(new Record(tokens[1].trim(), 

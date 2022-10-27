@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 
 public class TopNMapper4
     extends Mapper<LongWritable, Text, PairOfStrings, PairOfStrings> {
+    
+    public static final int DEFAULT_N = 10;
+    private int n = DEFAULT_N;
 
     @Override
     public void map(LongWritable key, Text value, Context
