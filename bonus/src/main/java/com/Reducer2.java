@@ -24,11 +24,11 @@ public class Reducer2
          Date.set(firstPair.getRightElement().toString());
          while(iterator.hasNext()) {
             PairOfStrings secondPair = iterator.next();
-            sum += Integer.parseInt(secondPair.getLeftElement().get());
+            sum += Integer.parseInt(secondPair.getLeftElement().toString());
          }
          context.write(NullWritable.get(), 
-               new Text(Store.toString()+","+
-               Date+
+               new Text(StoreID.toString()+","+
+               Date.toString()+
                Integer.toString(sum)));
       } else {
          context.write(NullWritable.get(), new Text("undefined"));
