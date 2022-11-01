@@ -73,7 +73,7 @@ public class Driver extends Configured
         FileOutputFormat.setOutputPath(job1, price);
         boolean status = job1.waitForCompletion(true);
         THE_LOGGER.info("run1(): status=" + status);
-        return status ? 0 : 1;
+        return status;
     }
     public boolean runJob2() throws IOException,
     InterruptedException, ClassNotFoundException {
@@ -97,6 +97,6 @@ public class Driver extends Configured
         FileOutputFormat.setOutputPath(job2, output);
         boolean status = job2.waitForCompletion(true);
         THE_LOGGER.info("run2(): status=" + status);
-        return status ? 0 : 1;
+        return status;
     }
 }
