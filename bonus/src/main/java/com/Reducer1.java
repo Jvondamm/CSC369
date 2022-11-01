@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class Reducer1
         extends Reducer<PairOfStrings, PairOfStrings, NullWritable, Text> {
-    IntWritable Price = new IntWritable();
+    DoubleWritable Price = new IntWritable();
     IntWritable Quantity = new IntWritable();
     IntWritable SalesID = new IntWritable();
     Text Name = new Text();
@@ -19,14 +19,14 @@ public class Reducer1
       Iterator<PairOfStrings> iterator = values.iterator();
       PairOfStrings firstPair = iterator.next();
       if (firstPair.getLeftElement().toString().equals("P")) {
-         Price.set(Integer.parseInt(firstPair.getRightElement().toString()));
+         Price.set(Double.parseDouble(firstPair.getRightElement().toString()));
          while(iterator.hasNext()) {
             PairOfStrings secondPair = iterator.next();
             String[] tokens = firstPair.getRightElement().toString().split(" ");
             SalesID.set(Integer.parseInt(tokens[0]));
             Quantity.set(Integer.parseInt(tokens[1]));
             context.write(NullWritable.get(), new Text(SalesID.toString()+","+
-            Integer.toString(Price.get() * Quantity.get())));
+            Double.toString(Price.get() * Quantity.get())));
          }
       } else {
          context.write(NullWritable.get(), new Text("undefined"));
