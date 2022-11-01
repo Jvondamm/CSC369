@@ -33,7 +33,7 @@ public class Driver extends Configured
     private static Path out4;
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 5) {
+        if (args.length != 11) {
           throw new IllegalArgumentException
                                     ("usage: <input1> <input2> <input3> <input4> <output>");
         }
