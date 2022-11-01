@@ -11,10 +11,23 @@ public class Driver extends Configured
                                          implements Tool {
     private static final Logger THE_LOGGER =
              Logger.getLogger(Driver.class);
+
+    /* JOB 1 */
     private static Path product;
     private static Path lineItem;
+
+    /* JOB 2 */
+    private static Path price; /* JOB 1 output */
+    private static Path sales2;
+
+    /* JOB 3 */
+    private static Path store;
+    private static Path sales3; /* JOB 2 output */
+
+    /* JOB 4 */
+    private static Path sales4; /* JOB 3 output */
     private static Path output;
-           
+
     public static void main(String[] args) throws Exception {
         if (args.length != 3) {
           throw new IllegalArgumentException
@@ -22,11 +35,10 @@ public class Driver extends Configured
         }
          product = new Path(args[0]);
          lineItem = new Path(args[1]);
-         output = new Path(args[2]);
- 
-        THE_LOGGER.info("inputDir1 = " + args[0]);
-        THE_LOGGER.info("inputDir2 = " + args[1]);
-        THE_LOGGER.info("outputDir = " + args[2]);
+         sales2 = newPath(args[2]);
+         price = new Path(args[3]);
+         sales3 = new Path(args[4]);
+
         int returnStatus = ToolRunner.
                       run(new Driver(), args);
         THE_LOGGER.info("returnStatus=" + returnStatus);
@@ -35,26 +47,55 @@ public class Driver extends Configured
 
     @Override
     public int run(String[] args) throws Exception {
-        Job job = Job.getInstance();
-        job.setJarByClass(Driver.class);
-        job.setJobName("JOB 1");
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+      return (runJob1()&&runJob2())? 0 : 1;
+    }
 
-        MultipleInputs.addInputPath(job, lineItem, 
+    public boolean runJob1() throws IOException,
+    InterruptedException, ClassNotFoundException {
+        Job job1 = Job.getInstance();
+        job1.setJarByClass(Driver.class);
+        job1.setJobName("JOB 1");
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(Text.class);
+
+        MultipleInputs.addInputPath(job1, lineItem,
         TextInputFormat.class, LineItemMapper1.class);
-        MultipleInputs.addInputPath(job, product,
+        MultipleInputs.addInputPath(job1, product,
           TextInputFormat.class, ProductMapper1.class);
 
-        job.setMapOutputKeyClass(PairOfStrings.class);
-        job.setMapOutputValueClass(PairOfStrings.class);
-        job.setReducerClass(Reducer1.class);
-        job.setPartitionerClass(Partitioner1.class);
-        job.setGroupingComparatorClass(GroupingComparator1.class);
+        job1.setMapOutputKeyClass(PairOfStrings.class);
+        job1.setMapOutputValueClass(PairOfStrings.class);
+        job1.setReducerClass(Reducer1.class);
+        job1.setPartitionerClass(Partitioner1.class);
+        job1.setGroupingComparatorClass(GroupingComparator1.class);
 
-        FileOutputFormat.setOutputPath(job, output);
+        FileOutputFormat.setOutputPath(job1, price);
         boolean status = job.waitForCompletion(true);
-        THE_LOGGER.info("run(): status=" + status);
+        THE_LOGGER.info("run1(): status=" + status);
+        return status ? 0 : 1;
+    }
+    public boolean runJob2() throws IOException,
+    InterruptedException, ClassNotFoundException {
+        Job job2 = Job.getInstance();
+        job2.setJarByClass(Driver.class);
+        job2.setJobName("JOB 2");
+        job2.setOutputKeyClass(Text.class);
+        job2.setOutputValueClass(Text.class);
+
+        MultipleInputs.addInputPath(job2, price,
+        TextInputFormat.class, PriceMapper2.class);
+        MultipleInputs.addInputPath(job2, sales2,
+          TextInputFormat.class, SalesMapper2.class);
+
+        job2.setMapOutputKeyClass(PairOfStrings.class);
+        job2.setMapOutputValueClass(PairOfStrings.class);
+        job2.setReducerClass(Reducer2.class);
+        job2.setPartitionerClass(Partitioner1.class);
+        job2.setGroupingComparatorClass(GroupingComparator1.class);
+
+        FileOutputFormat.setOutputPath(job2, output);
+        boolean status = job.waitForCompletion(true);
+        THE_LOGGER.info("run2(): status=" + status);
         return status ? 0 : 1;
     }
 }

@@ -3,3 +3,55 @@ Write a Map/Reduce program that finds the top 10 stores with the most revenues f
 2016-12, (Best Buy, SLO, $1444355), (Costco, LA, $1400344), ... //storeName =Best Buy, store city = SLO, total sales = $1,444,355
 2017-01 //and so on
 Write a Java program that does not use Hadoop and finds the same result. Please use appropriate structures (e.g., HashSet, HashMap) to make the Java program as efficient as possible. Make sure you get the same result from both programs. Also, compare the performance of the two programs. For a fair comparison, make the Java program writes the result to a file.
+
+
+JOB 1
+    ProductMapper1
+    ProductID, description, price -> (ProductID, 1), (P, price)
+
+    LineItemMapper1
+    ID, salesID, productID, quantity -> (ProductId, 2), (L, salesID quantity)
+
+    Partition/Group PairOfStrings
+
+    Reducer1
+    (Null, "SalesID, price * quantity")
+
+JOB 2
+    SalesMapper2
+    SalesID, date, time, storeID, customerID -> (SalesId, 1), (S, date StoreID)
+
+    PriceMapper2
+    SalesID, price * quantity(mapped to price) -> (SalesID, 2), (P, price)
+
+    Partition/Group PairOfStrings
+
+    Reducer2
+    unique S for each SalesID, but maybe not unique P, so S first then sum all Ps.
+    (Null, "StoreID, date, sum")
+
+JOB 3
+    SalesMapper3
+    "StoreID, date, sum" -> (StoreID, 2), (SA, "date sum")
+
+    StoreMapper3
+    StoreID, storeName, address, city, ZIP, state, phoneNumber ->
+    (StoreID, 1), (ST, "storeName city")
+
+    Partition/Group PairOfStrings
+
+    Reducer3
+    ST unique by StoreID, SA is not, so ordered by ST.
+    For each matching SA, write:
+    (Null, "date, storeName, city, sum")
+
+JOB 4
+    TopNMapper4
+    "date, storeName, city, sum" -> (date, 1), (1, "storeName, city, sum)
+
+    Reducer4
+    init TreeSet
+    for each entry, adds Record class of entry to TreeSet, removing when full.
+    When done pops off them into a string list, then outputs with date.
+
+    (date, (StoreName, city, sum), (StoreName, city, sum)...)

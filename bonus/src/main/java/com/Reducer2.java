@@ -12,7 +12,7 @@ public class Reducer2
     Text Date = new Text();
     Text StoreID = new Text();
     Text Name = new Text();
-    int sum = 0;
+    double sum = 0;
     @Override
     public void reduce(PairOfStrings key,
                    Iterable<PairOfStrings> values, Context context)
@@ -24,12 +24,12 @@ public class Reducer2
          Date.set(firstPair.getRightElement().toString());
          while(iterator.hasNext()) {
             PairOfStrings secondPair = iterator.next();
-            sum += Integer.parseInt(secondPair.getLeftElement().toString());
+            sum += Double.parseDouble(secondPair.getLeftElement().toString());
          }
-         context.write(NullWritable.get(), 
+         context.write(NullWritable.get(),
                new Text(StoreID.toString()+","+
                Date.toString()+","+
-               Integer.toString(sum)));
+               Double.toString(sum)));
       } else {
          context.write(NullWritable.get(), new Text("undefined"));
       }
