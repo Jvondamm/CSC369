@@ -16,18 +16,21 @@ public class Driver extends Configured
     /* JOB 1 */
     private static Path product;
     private static Path lineItem;
+    private static Path out1;
 
     /* JOB 2 */
-    private static Path price; /* JOB 1 output */
+    private static Path price;
     private static Path sales2;
+    private static Path out2;
 
     /* JOB 3 */
     private static Path store;
-    private static Path sales3; /* JOB 2 output */
+    private static Path sales3;
+    private static Path out3;
 
     /* JOB 4 */
-    private static Path sales4; /* JOB 3 output */
-    private static Path output;
+    private static Path sales4;
+    private static Path out4;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
@@ -36,19 +39,27 @@ public class Driver extends Configured
         }
          product = new Path(args[0]);
          lineItem = new Path(args[1]);
-         sales2 = new Path(args[2]);
-         price = new Path(args[3]);
-         sales3 = new Path(args[4]);
+         out1 = new Path(args[2]);
 
-        int returnStatus = ToolRunner.
-                      run(new Driver(), args);
+         price = new Path(args[3]); /* out1/part-r-00000 */
+         sales2 = new Path(args[3]);
+         out2 = new Path(args[4]);
+
+         store = new Path(args[5]);
+         sales3 = new Path(args[6]); /* out2/part-r-00000 */
+         out3 = new Path(args[7]);
+
+         sales4 = new Path(args[8]); /* out3/part-r-00000 */
+         out4 = new Path(args[9]);
+
+        int returnStatus = ToolRunner.run(new Driver(), args);
         THE_LOGGER.info("returnStatus=" + returnStatus);
         System.exit(returnStatus);
      }
 
     @Override
     public int run(String[] args) throws Exception {
-      return (runJob1()&&runJob2())? 0 : 1;
+      return (runJob1()&&runJob2()&&runJob3())? 0 : 1;
     }
 
     public boolean runJob1() throws IOException,
@@ -70,11 +81,12 @@ public class Driver extends Configured
         job1.setPartitionerClass(Partitioner1.class);
         job1.setGroupingComparatorClass(GroupingComparator1.class);
 
-        FileOutputFormat.setOutputPath(job1, price);
+        FileOutputFormat.setOutputPath(job1, out1);
         boolean status = job1.waitForCompletion(true);
         THE_LOGGER.info("run1(): status=" + status);
         return status;
     }
+
     public boolean runJob2() throws IOException,
     InterruptedException, ClassNotFoundException {
         Job job2 = Job.getInstance();
@@ -94,9 +106,34 @@ public class Driver extends Configured
         job2.setPartitionerClass(Partitioner1.class);
         job2.setGroupingComparatorClass(GroupingComparator1.class);
 
-        FileOutputFormat.setOutputPath(job2, output);
+        FileOutputFormat.setOutputPath(job2, out2);
         boolean status = job2.waitForCompletion(true);
         THE_LOGGER.info("run2(): status=" + status);
+        return status;
+    }
+
+    public boolean runJob3() throws IOException,
+    InterruptedException, ClassNotFoundException {
+        Job job3 = Job.getInstance();
+        job3.setJarByClass(Driver.class);
+        job3.setJobName("JOB 3");
+        job3.setOutputKeyClass(Text.class);
+        job3.setOutputValueClass(Text.class);
+
+        MultipleInputs.addInputPath(job3, sales3,
+        TextInputFormat.class, SalesMapper3.class);
+        MultipleInputs.addInputPath(job3, store,
+          TextInputFormat.class, StoreMapper3.class);
+
+        job3.setMapOutputKeyClass(PairOfStrings.class);
+        jobe.setMapOutputValueClass(PairOfStrings.class);
+        job3.setReducerClass(Reducer2.class);
+        job3.setPartitionerClass(Partitioner1.class);
+        jobe.setGroupingComparatorClass(GroupingComparator1.class);
+
+        FileOutputFormat.setOutputPath(job3, out3);
+        boolean status = job3.waitForCompletion(true);
+        THE_LOGGER.info("run3(): status=" + status);
         return status;
     }
 }
