@@ -126,10 +126,10 @@ public class Driver extends Configured
           TextInputFormat.class, StoreMapper3.class);
 
         job3.setMapOutputKeyClass(PairOfStrings.class);
-        jobe.setMapOutputValueClass(PairOfStrings.class);
+        job3.setMapOutputValueClass(PairOfStrings.class);
         job3.setReducerClass(Reducer2.class);
         job3.setPartitionerClass(Partitioner1.class);
-        jobe.setGroupingComparatorClass(GroupingComparator1.class);
+        job3.setGroupingComparatorClass(GroupingComparator1.class);
 
         FileOutputFormat.setOutputPath(job3, out3);
         boolean status = job3.waitForCompletion(true);
