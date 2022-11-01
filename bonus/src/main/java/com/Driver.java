@@ -127,13 +127,32 @@ public class Driver extends Configured
 
         job3.setMapOutputKeyClass(PairOfStrings.class);
         job3.setMapOutputValueClass(PairOfStrings.class);
-        job3.setReducerClass(Reducer2.class);
+        job3.setReducerClass(Reducer3.class);
         job3.setPartitionerClass(Partitioner1.class);
         job3.setGroupingComparatorClass(GroupingComparator1.class);
 
         FileOutputFormat.setOutputPath(job3, out3);
         boolean status = job3.waitForCompletion(true);
         THE_LOGGER.info("run3(): status=" + status);
+        return status;
+    }
+
+    public boolean runJob4() throws IOException,
+    InterruptedException, ClassNotFoundException {
+        Job job4 = Job.getInstance();
+        job4.setJarByClass(Driver.class);
+        job4.setJobName("JOB 4");
+        job4.setOutputKeyClass(Text.class);
+        job4.setOutputValueClass(Text.class);
+        job4.setMapOutputKeyClass(PairOfStrings.class);
+        job4.setMapOutputValueClass(PairOfStrings.class);
+        job.setMapperClass(TopNMapper4.class);
+        job4.setReducerClass(Reducer4.class);
+
+        FileInputFormat.setInputPaths(job4, sales4);
+        FileOutputFormat.setOutputPath(job4, out4);
+        boolean status = job4.waitForCompletion(true);
+        THE_LOGGER.info("run4(): status=" + status);
         return status;
     }
 }
