@@ -6,6 +6,7 @@ import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.lib.output.*;
 import org.apache.hadoop.mapreduce.lib.input.*;
+import java.io.IOException;
 
 public class Driver extends Configured
                                          implements Tool {
@@ -35,7 +36,7 @@ public class Driver extends Configured
         }
          product = new Path(args[0]);
          lineItem = new Path(args[1]);
-         sales2 = newPath(args[2]);
+         sales2 = new Path(args[2]);
          price = new Path(args[3]);
          sales3 = new Path(args[4]);
 
@@ -70,7 +71,7 @@ public class Driver extends Configured
         job1.setGroupingComparatorClass(GroupingComparator1.class);
 
         FileOutputFormat.setOutputPath(job1, price);
-        boolean status = job.waitForCompletion(true);
+        boolean status = job1.waitForCompletion(true);
         THE_LOGGER.info("run1(): status=" + status);
         return status ? 0 : 1;
     }
@@ -94,7 +95,7 @@ public class Driver extends Configured
         job2.setGroupingComparatorClass(GroupingComparator1.class);
 
         FileOutputFormat.setOutputPath(job2, output);
-        boolean status = job.waitForCompletion(true);
+        boolean status = job2.waitForCompletion(true);
         THE_LOGGER.info("run2(): status=" + status);
         return status ? 0 : 1;
     }
