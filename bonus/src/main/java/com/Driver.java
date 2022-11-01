@@ -42,15 +42,15 @@ public class Driver extends Configured
          out1 = new Path(args[2]);
 
          price = new Path(args[3]); /* out1/part-r-00000 */
-         sales2 = new Path(args[3]);
-         out2 = new Path(args[4]);
+         sales2 = new Path(args[4]);
+         out2 = new Path(args[5]);
 
-         store = new Path(args[5]);
-         sales3 = new Path(args[6]); /* out2/part-r-00000 */
-         out3 = new Path(args[7]);
+         store = new Path(args[6]);
+         sales3 = new Path(args[7]); /* out2/part-r-00000 */
+         out3 = new Path(args[8]);
 
-         sales4 = new Path(args[8]); /* out3/part-r-00000 */
-         out4 = new Path(args[9]);
+         sales4 = new Path(args[9]); /* out3/part-r-00000 */
+         out4 = new Path(args[10]);
 
         int returnStatus = ToolRunner.run(new Driver(), args);
         THE_LOGGER.info("returnStatus=" + returnStatus);
@@ -146,7 +146,7 @@ public class Driver extends Configured
         job4.setOutputValueClass(Text.class);
         job4.setMapOutputKeyClass(PairOfStrings.class);
         job4.setMapOutputValueClass(PairOfStrings.class);
-        job.setMapperClass(TopNMapper4.class);
+        job4.setMapperClass(TopNMapper4.class);
         job4.setReducerClass(Reducer4.class);
 
         FileInputFormat.setInputPaths(job4, sales4);
