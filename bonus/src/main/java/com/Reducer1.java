@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class Reducer1
         extends Reducer<PairOfStrings, PairOfStrings, NullWritable, Text> {
-    DoubleWritable Price = new IntWritable();
+    DoubleWritable Price = new DoubleWritable();
     IntWritable Quantity = new IntWritable();
     IntWritable SalesID = new IntWritable();
     Text Name = new Text();
