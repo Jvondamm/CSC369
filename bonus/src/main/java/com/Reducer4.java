@@ -16,7 +16,7 @@ public class Reducer4
    public void reduce(PairOfStrings key, Iterable<PairOfStrings> values, Context context)
    throws IOException, InterruptedException {
       SortedSet<Record> top = new TreeSet<>();
-      String date;
+      String date = new String("");
       for (PairOfStrings value : values) {
          String[] tokens = value.getRightElement().toString().trim().split(" ");
          date = tokens[0].trim();
