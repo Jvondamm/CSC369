@@ -24,7 +24,7 @@ public class Reducer2
          StoreID.set(firstPair.getRightElement().toString().split(" ")[1]);
          while(iterator.hasNext()) {
             PairOfStrings secondPair = iterator.next();
-            sum += Double.parseDouble(secondPair.getLeftElement().toString());
+            sum += Double.parseDouble(secondPair.getRightElement().toString());
          }
          context.write(NullWritable.get(),
                new Text(StoreID.toString()+","+
