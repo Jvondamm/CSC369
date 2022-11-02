@@ -19,8 +19,8 @@ public class TopNMapper4
       String line = value.toString();
       String[] tokens = line.split(",");
       Text Date = new Text(tokens[0].trim());
-      Text Values = new Text(Date+" "+tokens[1].trim()+" "+
-      tokens[2].trim()+" "+tokens[3].trim());
+      Text Values = new Text(Date+","+tokens[1].trim()+","+
+      tokens[2].trim()+","+tokens[3].trim());
       PairOfStrings outputKey = new PairOfStrings();
       PairOfStrings outputValue = new PairOfStrings();
       outputKey.set(Date, new Text("1"));

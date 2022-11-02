@@ -18,7 +18,7 @@ public class Reducer4
       SortedSet<Record> top = new TreeSet<>();
       String date = new String("");
       for (PairOfStrings value : values) {
-         String[] tokens = value.getRightElement().toString().trim().split(" ");
+         String[] tokens = value.getRightElement().toString().trim().split(",");
          date = tokens[0].trim();
          top.add(new Record(tokens[1].trim(),
          tokens[2].trim(), Double.parseDouble(tokens[3].trim())));
