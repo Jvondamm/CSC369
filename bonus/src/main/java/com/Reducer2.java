@@ -20,8 +20,8 @@ public class Reducer2
       Iterator<PairOfStrings> iterator = values.iterator();
       PairOfStrings firstPair = iterator.next();
       if (firstPair.getLeftElement().toString().equals("S")) {
-         StoreID.set(firstPair.getLeftElement().toString());
-         Date.set(firstPair.getRightElement().toString());
+         Date.set(firstPair.getRightElement().toString().split(" ")[0]);
+         StoreID.set(firstPair.getRightElement().toString().split(" ")[1]);
          while(iterator.hasNext()) {
             PairOfStrings secondPair = iterator.next();
             sum += Double.parseDouble(secondPair.getLeftElement().toString());

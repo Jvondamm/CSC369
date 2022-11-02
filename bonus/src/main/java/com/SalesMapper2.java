@@ -13,9 +13,8 @@ public class SalesMapper2
     String line = value.toString();
     String[] tokens = line.split(",");
     Text SalesID = new Text(tokens[0].trim());
-    String[] date = tokens[2].split("/");
-    Text Values = new Text(tokens[1].trim()+" "+
-    date[0]+"-"+date[1]);
+    String[] date = tokens[1].split("/");
+    Text Values = new Text(date[0]+"-"+date[1]+" "+tokens[3]);
     PairOfStrings outputKey = new PairOfStrings();
     PairOfStrings outputValue = new PairOfStrings();
     outputKey.set(SalesID, new Text("1"));

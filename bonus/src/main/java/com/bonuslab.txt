@@ -47,7 +47,7 @@ JOB 3
 
 JOB 4
     TopNMapper4
-    "date, storeName, city, sum" -> (date, 1), (1, "storeName, city, sum)
+    "date, storeName, city, sum" -> (date, 1), (1, "date storeName, city, sum)
 
     Reducer4
     init TreeSet

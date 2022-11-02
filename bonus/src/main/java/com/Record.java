@@ -1,9 +1,9 @@
 public class Record implements Comparable <Record>{
     private String name;
     private String city;
-    private int price;
+    private double price;
 
-    public Record(String name, String city, int price) {
+    public Record(String name, String city, double price) {
         this.name = name;
         this.city = city;
         this.price = price;

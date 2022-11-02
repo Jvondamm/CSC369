@@ -15,13 +15,13 @@ public class Reducer4
    private SortedSet<Record> top = new TreeSet<>();
    private String date;
 
-   public void reduce(PairOfStrings key, Iterable<PairOfStrings> values, Context context) 
+   public void reduce(PairOfStrings key, Iterable<PairOfStrings> values, Context context)
    throws IOException, InterruptedException {
       for (PairOfStrings value : values) {
          String[] tokens = value.getRightElement().toString().trim().split(" ");
          date = tokens[0].trim();
-         top.add(new Record(tokens[1].trim(), 
-         tokens[2].trim(), Integer.parseInt(tokens[3].trim())));
+         top.add(new Record(tokens[1].trim(),
+         tokens[2].trim(), Double.parseDouble(tokens[3].trim())));
          if (top.size() > n) {
             top.remove(top.last());
          }
@@ -34,7 +34,7 @@ public class Reducer4
    }
 
     @Override
-   protected void setup(Context context) 
+   protected void setup(Context context)
       throws IOException, InterruptedException {
       this.n = context.getConfiguration().getInt("N", TopNMapper4.DEFAULT_N);
    }
