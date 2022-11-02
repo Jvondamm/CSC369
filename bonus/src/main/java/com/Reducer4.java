@@ -12,11 +12,11 @@ public class Reducer4
          extends Reducer<PairOfStrings, PairOfStrings, NullWritable, Text> {
 
    private int n = TopNMapper4.DEFAULT_N;
-   private SortedSet<Record> top = new TreeSet<>();
-   private String date;
 
    public void reduce(PairOfStrings key, Iterable<PairOfStrings> values, Context context)
    throws IOException, InterruptedException {
+      SortedSet<Record> top = new TreeSet<>();
+      String date;
       for (PairOfStrings value : values) {
          String[] tokens = value.getRightElement().toString().trim().split(" ");
          date = tokens[0].trim();

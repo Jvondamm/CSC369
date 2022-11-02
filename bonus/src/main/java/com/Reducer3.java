@@ -25,8 +25,8 @@ public class Reducer3
          while(iterator.hasNext()) {
             PairOfStrings secondPair = iterator.next();
             String[] tokens2 = secondPair.getRightElement().toString().split(" ");
-            Date.set(tokens[1].trim());
-            Price.set(Double.parseDouble(tokens[1]));
+            Date.set(tokens2[0].trim());
+            Price.set(Double.parseDouble(tokens2[1]));
             context.write(NullWritable.get(),
                new Text(Date.toString()+","+
                Name.toString()+","+

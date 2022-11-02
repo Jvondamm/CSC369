@@ -59,7 +59,7 @@ public class Driver extends Configured
 
     @Override
     public int run(String[] args) throws Exception {
-      return (runJob1()&&runJob2()&&runJob3())? 0 : 1;
+      return (runJob1()&&runJob2()&&runJob3()&&runJob4())? 0 : 1;
     }
 
     public boolean runJob1() throws IOException,
