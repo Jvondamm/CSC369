@@ -1,4 +1,3 @@
-package example
 import org.apache.spark.SparkContext._
 import scala.io._
 import org.apache.spark.{ SparkConf, SparkContext }
