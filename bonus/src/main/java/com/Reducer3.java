@@ -19,7 +19,7 @@ public class Reducer3
       Iterator<PairOfStrings> iterator = values.iterator();
       PairOfStrings firstPair = iterator.next();
       if (firstPair.getLeftElement().toString().equals("ST")) {
-         String[] tokens = firstPair.getRightElement().toString().split(" ");
+         String[] tokens = firstPair.getRightElement().toString().split(",");
          Name.set(tokens[0].trim());
          City.set(tokens[1].trim());
          while(iterator.hasNext()) {

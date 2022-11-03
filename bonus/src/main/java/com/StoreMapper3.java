@@ -13,7 +13,7 @@ public class StoreMapper3
     String line = value.toString();
     String[] tokens = line.split(",");
     Text StoreID = new Text(tokens[0].trim());
-    Text Values = new Text(tokens[1].trim()+" "+tokens[3].trim());
+    Text Values = new Text(tokens[1].trim()+","+tokens[3].trim());
     PairOfStrings outputKey = new PairOfStrings();
     PairOfStrings outputValue = new PairOfStrings();
     outputKey.set(StoreID, new Text("1"));
