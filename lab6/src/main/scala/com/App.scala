@@ -22,15 +22,16 @@ object App {
 
     /* id, item, price */
     val products = sc.textFile("product.csv").map(x =>
-        x.split(",")(0) -> "%.2f".format(x.split(",")(2).toDouble).toDouble)
-    val saleTotal = sc.textFile("lineItem.csv").map(x =>
-        (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3).toInt))
-        .map(x => (x._2, (products(x._3) * x._4))).groupBy(x => (x._1, x._2)).mapValues(_.map(_._2).sum)
+        x.split(", ")(0) -> "%.2f".format(x.split(", ")(2).toDouble).toDouble)
+    val sales = sc.textFile("lineItem.csv").map(x =>
+        (x.split(",")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3).toDouble))
+        .map(x => (x._2, (products(x._3) * x._4)))
+    val saleTotal = sales.groupBy(x => (x._1, x._2)).mapValues(_.map(_._2).sum)
     val storeTotal = sc.textFile("sales.csv").map(x =>
-        (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3), x.split(",")(4)))
+        (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3), x.split(", ")(4)))
         .map(x => (x._4, saleTotal(x._1))).groupBy(x => (x._1, x._2)).mapValues(_.map(_._2).sum)
     sc.textFile("store.csv").map(x =>
-        (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3), x.split(",")(4),x.split(",")(5),x.split(",")(6)))
+        (x.split(", ")(0), x.split(", ")(1), x.split(", ")(2), x.split(", ")(3), x.split(", ")(4),x.split(", ")(5),x.split(", ")(6)))
         .map(x =>(x._6, x._1, saleTotal(x._1))).sortBy(x => (x._1, x._2)).foreach(println(_))
   }
 }
