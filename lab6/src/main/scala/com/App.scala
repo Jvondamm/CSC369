@@ -20,6 +20,8 @@ object App {
     val stores = store(sc)
     val sales = sale(sc)
 
+    val job1 = products.leftOuterJoin(lineItems).foreach(println(_))
+
     // salesID, productID, price*quantity then join by salesID
     // .join sales, .join stores -> storeID, state, salesID, money then groupby storeID, sort by state, and print
 
@@ -33,10 +35,10 @@ object App {
         (x.split(", ")(0), x.split(", ")(2).toDouble))
     }
 
-    // lineItemID, salesID, productID, quantity -> (salesID, productID, quantity)
+    // lineItemID, salesID, productID, quantity -> (productID, salesID, quantity)
     def lineItem(sc : SparkContext): RDD[(String, String, Double)] = {
         return sc.textFile("lineItem.csv").map(x =>
-        (x.split(", ")(1), x.split(", ")(2), x.split(", ")(3).toDouble))
+        (x.split(", ")(2), x.split(", ")(1), x.split(", ")(3).toDouble))
     }
 
     // storeID, storeName, address, city, ZIP, state, phoneNumber -> (storeID, state)
