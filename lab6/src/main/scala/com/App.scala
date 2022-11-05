@@ -21,13 +21,12 @@ object App {
     //don't use setMaster if running on cluster
 
     /* productID, price */
-    val products = product
-
+    val products = product(sc)
 
     val lineItems = sc.textFile("lineItem.csv")
       .map(x => (x.split(", ")(1), x.split(", ")))
       .groupByKey()
-      .mapValues(x =>  x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z))
+      .mapValues(x => x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z))
       .foreach(println(_))
 
     // val sales = sc.textFile("lineItem.csv").map(x =>
@@ -43,6 +42,6 @@ object App {
   }
 
   def product(sc : SparkContext): RDD[(String, Double)] = {
-    return sc.textFile("product.csv").map(x => x.split(", ")(0), x.split(", ")(2).toDouble)
+    return sc.textFile("product.csv").map(x => (x.split(", ")(0), x.split(", ")(2).toDouble))
   }
 }
