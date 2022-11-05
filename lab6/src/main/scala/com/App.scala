@@ -1,3 +1,4 @@
+package example
 import org.apache.spark.SparkContext._
 import scala.io._
 import org.apache.spark.{ SparkConf, SparkContext }
@@ -20,7 +21,7 @@ object App {
     //don't use setMaster if running on cluster
 
     /* id, item, price */
-    val products = sc.textFile("product.csv").getLines().toList.map(x =>
+    val products = sc.textFile("product.csv").map(x =>
         x.split(",")(0) -> "%.2f".format(x.split(",")(2).toDouble).toDouble).toMap
     val saleTotal = sc.textFile("lineItem.csv").map(x =>
         (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3).toInt))
