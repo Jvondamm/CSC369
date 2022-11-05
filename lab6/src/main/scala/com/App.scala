@@ -31,25 +31,25 @@ object App {
 
     // productID, description, price -> (productID, price)
     def product(sc : SparkContext): RDD[(String, Double)] = {
-        return sc.textFile("product.csv").map(x =>
+        return sc.textFile("input/product.csv").map(x =>
         (x.split(", ")(0), x.split(", ")(2).toDouble))
     }
 
     // lineItemID, salesID, productID, quantity -> (productID, salesID, quantity)
     def lineItem(sc : SparkContext): RDD[(String, String, Double)] = {
-        return sc.textFile("lineItem.csv").map(x =>
+        return sc.textFile("input/lineItem.csv").map(x =>
         (x.split(", ")(2), x.split(", ")(1), x.split(", ")(3).toDouble))
     }
 
     // storeID, storeName, address, city, ZIP, state, phoneNumber -> (storeID, state)
     def store(sc: SparkContext): RDD[(String, String)] = {
-        return sc.textFile("store.csv").map(x =>
+        return sc.textFile("input/store.csv").map(x =>
         (x.split(", ")(0), x.split(", ")(5)))
     }
 
     // saleID, date, time, storeID, customerID -> (saleID, storeID)
     def sale(sc: SparkContext): RDD[(String, String)] = {
-        sc.textFile("sales.csv").map(x =>
+        sc.textFile("input/sales.csv").map(x =>
         (x.split(", ")(0), x.split(", ")(3)))
     }
 }
