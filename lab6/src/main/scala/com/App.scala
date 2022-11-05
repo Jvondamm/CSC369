@@ -26,7 +26,7 @@ object App {
     val lineItems = sc.textFile("lineItem.csv")
       .map(x => (x.split(", ")(1), x.split(", ")))
       .groupByKey()
-      .mapValues(x => x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z))
+      .mapValues(x => x.foldRight(0.0)((y,z) => products(y._2) * y(3).toInt + z))
       .foreach(println(_))
 
     // val sales = sc.textFile("lineItem.csv").map(x =>
