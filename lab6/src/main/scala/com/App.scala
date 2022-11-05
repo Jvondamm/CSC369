@@ -22,10 +22,10 @@ object App {
 
     /* id, item, price */
     val products = sc.textFile("product.csv").map(x =>
-        x.split(",")(0) -> "%.2f".format(x.split(",")(2).toDouble).toDouble).toMap
+        x.split(",")(0) -> "%.2f".format(x.split(",")(2).toDouble).toDouble)
     val saleTotal = sc.textFile("lineItem.csv").map(x =>
         (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3).toInt))
-        .map(x => (x._2, products(x._3) * x._4)).groupBy(_._1).mapValues(_.map(_._2).sum)
+        .map(x => (x._2, products(x._3) * x._4)).groupBy(x => (x._1, x._2)).mapValues(_.map(_._2).sum)
     val storeTotal = sc.textFile("sales.csv").map(x =>
         (x.split(",")(0), x.split(",")(1), x.split(",")(2), x.split(",")(3), x.split(",")(4)))
         .map(x => (x._4, saleTotal(x._1))).groupBy(_._1).mapValues(_.map(_._2).sum)
