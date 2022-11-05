@@ -20,7 +20,7 @@ object App {
     val stores = store(sc)
     val sales = sale(sc)
 
-    val job1 = products.leftOuterJoin(lineItems.map(x => x._1, (x._2, x._3))).foreach(println(_))
+    val job1 = products.leftOuterJoin(lineItems.map(x => (x._1, (x._2, x._3)))).foreach(println(_))
 
     // salesID, productID, price*quantity then join by salesID
     // .join sales, .join stores -> storeID, state, salesID, money then groupby storeID, sort by state, and print
