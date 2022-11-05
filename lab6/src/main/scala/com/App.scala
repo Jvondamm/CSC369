@@ -36,7 +36,7 @@ object App {
     // lineItemID, salesID, productID, quantity -> (salesID, productID, quantity)
     def lineItem(sc : SparkContext): RDD[(String, String, Double)] = {
         return sc.textFile("lineItem.csv").map(x =>
-        (x.split(", ")(1), x.split(", ")(2), x.split(", ")(2)))
+        (x.split(", ")(1), x.split(", ")(2), x.split(", ")(3).toDouble))
     }
 
     // storeID, storeName, address, city, ZIP, state, phoneNumber -> (storeID, state)
