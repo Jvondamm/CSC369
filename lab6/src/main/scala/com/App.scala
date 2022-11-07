@@ -22,14 +22,13 @@ object App {
 
     val job1 = lineItems.groupByKey().mapValues(x => x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z)) 
     val job2 = sales.join(lineItems).map(x => (x._2._1(3), x._2._2)).groupByKey().mapValues(x => x.sum)
-      .join(stores).sortBy(_._2._2).foreach(println(_))
-
+    val job3 = job2.join(stores).sortBy(_._2._2).foreach(println(_))
     }
 
     // productID, description, price -> (productID, price)
     def product(sc : SparkContext): Map[String, Double] = {
-        return Source.fromFile("./products").getLines().toList.map(x =>
-        (x.split(", ")(0),  x.split(", ")(2).toDouble)).toMap
+        return Source.fromFile("input/product.csv").getLines().toList.map(x =>
+        (x.split(",")(0),  x.split(",")(2).toDouble)).toMap
     }
 
     // lineItemID, salesID, productID, quantity -> (productID, salesID, quantity)
