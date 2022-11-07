@@ -20,21 +20,13 @@ object App {
     val stores = store(sc)
     val sales = sale(sc)
 
-    // (productID (price, (salesID, quantity)))
-    val job1 = lineItems.groupByKey().mapValues(x => x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z))
-
-    // salesID, productID, price*quantity then join by salesID
-    // .join sales, .join stores -> storeID, state, salesID, money then groupby storeID, sort by state, and print
-
-    // state, storeID, sales
+    val job1 = lineItems.groupByKey().mapValues(x => x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z)) 
+    val job2 = sales.join(lineItems).map(x => (x._2._1(3), x._2._2)).groupByKey().mapValues(x => x.sum)
+      .join(stores).sortBy(_._2._2).foreach(println(_))
 
     }
 
     // productID, description, price -> (productID, price)
-    // def product(sc : SparkContext): RDD[(String, Double)] = {
-    //     return sc.textFile("input/product.csv").map(x =>
-    //     (x.split(",")(0), x.split(",")(2).toDouble))
-    // }
     def product(sc : SparkContext): Map[String, Double] = {
         return Source.fromFile("./products").getLines().toList.map(x =>
         (x.split(", ")(0),  x.split(", ")(2).toDouble)).toMap
