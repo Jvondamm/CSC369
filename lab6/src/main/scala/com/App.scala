@@ -22,7 +22,7 @@ object App {
     val sales = sale(sc)
 
     val job1 = lineItems.groupByKey().mapValues(x => x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z)) 
-    sales.join(lineItems).map(x => (x._2._1, x._2._2)).groupByKey().mapValues(x => x.sum).join(stores).sortBy(_._2._2).foreach(println(_))
+    sales.join(job1).map(x => (x._2._1, x._2._2)).groupByKey().mapValues(x => x.sum).join(stores).sortBy(_._2._2).foreach(println(_))
     }
 
     // productID, description, price -> (productID, price)
