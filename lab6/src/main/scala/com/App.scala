@@ -27,7 +27,7 @@ object App {
 
     // productID, description, price -> (productID, price)
     def product: Map[String, Double] = {
-        return Source.fromFile("/user/jvondamm/input/product.csv").getLines().toList.map(x =>
+        return Source.fromFile("input/product.csv").getLines().toList.map(x =>
         (x.split(",")(0),  x.split(",")(2).toDouble)).toMap
     }
 
