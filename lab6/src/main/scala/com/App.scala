@@ -16,7 +16,7 @@ object App {
     val conf = new SparkConf().setAppName("NameOfApp")
     val sc = new SparkContext(conf)
 
-    val products = product(sc)
+    val products = product()
     val lineItems = lineItem(sc)
     val stores = store(sc)
     val sales = sale(sc)
@@ -26,7 +26,7 @@ object App {
     }
 
     // productID, description, price -> (productID, price)
-    def product(sc : SparkContext): Map[String, Double] = {
+    def product: Map[String, Double] = {
         return Source.fromFile("product.csv").getLines().toList.map(x =>
         (x.split(",")(0),  x.split(",")(2).toDouble)).toMap
     }
