@@ -31,9 +31,13 @@ object App {
     }
 
     // productID, description, price -> (productID, price)
-    def product(sc : SparkContext): RDD[(String, Double)] = {
-        return sc.textFile("input/product.csv").map(x =>
-        (x.split(",")(0), x.split(",")(2).toDouble))
+    // def product(sc : SparkContext): RDD[(String, Double)] = {
+    //     return sc.textFile("input/product.csv").map(x =>
+    //     (x.split(",")(0), x.split(",")(2).toDouble))
+    // }
+    def product(sc : SparkContext): Map[String, Double] = {
+        return Source.fromFile("./products").getLines().toList.map(x =>
+        (x.split(", ")(0),  x.split(", ")(2).toDouble)).toMap
     }
 
     // lineItemID, salesID, productID, quantity -> (productID, salesID, quantity)
