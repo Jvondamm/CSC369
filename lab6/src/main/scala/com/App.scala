@@ -21,7 +21,7 @@ object App {
     val sales = sale(sc)
 
     // (productID (price, (salesID, quantity)))
-    val job1 = lineItems.groupByKey().mapValues(x => x.foldRight(0.0)((y,z) => z + products.lookup(y(2))*y(3).toInt))
+    val job1 = lineItems.groupByKey().mapValues(x => x.foldRight(0.0)((y,z) => products.lookup(y(2)) * y(3).toInt + z))
 
     // salesID, productID, price*quantity then join by salesID
     // .join sales, .join stores -> storeID, state, salesID, money then groupby storeID, sort by state, and print
@@ -39,7 +39,7 @@ object App {
     // lineItemID, salesID, productID, quantity -> (productID, salesID, quantity)
     def lineItem(sc : SparkContext): RDD[(String, Array[String])] = {
         return sc.textFile("input/lineItem.csv").map(x =>
-        (x.split(",")(2), x.split(",")))
+        (x.split(",")(1), x.split(",")))
     }
 
     // storeID, storeName, address, city, ZIP, state, phoneNumber -> (storeID, state)
