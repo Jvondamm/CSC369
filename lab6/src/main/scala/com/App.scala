@@ -16,7 +16,7 @@ object App {
     val conf = new SparkConf().setAppName("NameOfApp")
     val sc = new SparkContext(conf)
 
-    val products = product()
+    val products = product
     val lineItems = lineItem(sc)
     val stores = store(sc)
     val sales = sale(sc)
