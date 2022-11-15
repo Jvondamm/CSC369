@@ -17,12 +17,15 @@ object App {
     val sc = new SparkContext(conf)
 
     val products = product
+    products.foreach(println(_))
     val lineItems = lineItem(sc)
+    lineItems.foreach(println(_))
     val stores = store(sc)
+    stores.foreach(println(_))
     val sales = sale(sc)
+    sales.foreach(println(_))
 
     val job1 = lineItems.groupByKey().mapValues(x => x.foldRight(0.0)((y,z) => products(y(2)) * y(3).toInt + z))
-    job1.foreach(println(_))
     sales.join(job1).map(x => (x._2._1, x._2._2)).groupByKey().mapValues(x => x.sum).join(stores).sortBy(_._2._2).foreach(println(_))
     }
 
