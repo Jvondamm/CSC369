@@ -51,7 +51,7 @@ object App {
     // storeID, storeName, address, city, ZIP, state, phoneNumber -> (storeID, storeName, city)
     def store(sc: SparkContext): RDD[(String, String, String)] = {
         return sc.textFile("/user/jvondamm/input/store.csv").map(x =>
-        (x.split(",")(0), x.split(",")(1), x.split(",")(3)))
+        (x.split(",")(0), (x.split(",")(1), x.split(",")(3))))
     }
 
     // saleID, date, time, storeID, customerID -> (saleID, month, storeID)
