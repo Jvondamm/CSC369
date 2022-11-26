@@ -31,7 +31,7 @@ object App {
     // map values where we group by date and get total of sum, then map to (storeName, sum) and collect and print
     job2.join(job1).map(x => (x._2._1(1), (x._2._1(5), x._2._1(6), x._2._2))).groupByKey().sortByKey()
       .mapValues(x => x.groupBy(_._1).mapValues(x => x.toList.map(x => (x._3))).mapValues(_.sum))
-      .map(x => (x._1, x._2.toList.sorted)).collect().foreach(println(_))
+      .map(x => (x._1, x._2.toList.sorted)).head(10).foreach(println(_))
     }
 
     // productID, description, price -> (productID, price)
